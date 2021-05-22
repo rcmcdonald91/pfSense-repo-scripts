@@ -5,6 +5,9 @@ ARCH=`uname -m`
 if [ $ARCH == "arm" ]
 then
 	ARCH="armv7"
+elif  [ $ARCH == "arm64" ]
+then
+	ARCH="aarch64"
 fi
 
 KEY=https://packages.mced.tech/install/poudriere.cert
