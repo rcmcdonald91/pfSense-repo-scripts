@@ -1,0 +1,61 @@
+[
+  {
+    "id": "deploy-from-git",
+    "execute-command": "/root/pfSense-repo-scripts/build.sh",
+    "command-working-directory": "/root/",
+    "trigger-rule":
+    {
+      "and":
+      [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "GITHUB_WEBHOOK_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "tag",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "ref_type"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "deploy-tools-from-git",
+    "execute-command": "/root/pfSense-repo-scripts/deploy_tools.sh",
+    "command-working-directory": "/root/",
+    "trigger-rule":
+    {
+      "and":
+      [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "GITHUB_WEBHOOK_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
+
