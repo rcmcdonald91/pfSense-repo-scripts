@@ -36,7 +36,7 @@
   },
   {
     "id": "deploy-tools-from-git",
-    "execute-command": "/root/pfSense-repo-scripts/deploy_tools.sh",
+    "execute-command": "/root/pfSense-repo-scripts/deploy-tools.sh",
     "command-working-directory": "/root/",
     "trigger-rule":
     {
