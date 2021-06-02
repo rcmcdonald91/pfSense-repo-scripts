@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export PATH=$PATH:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin
+
 poudriere ports -u -p ng_ports_251
 poudriere ports -u -p ng_ports_devel
 poudriere ports -u -p wg_pkg_devel
