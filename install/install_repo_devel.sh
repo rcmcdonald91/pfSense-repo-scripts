@@ -1,6 +1,16 @@
 #!/bin/sh
 CURL=/usr/local/bin/curl
 ARCH=`uname -m`
+
+if [ $ARCH == "arm" ]
+then
+	ARCH="armv7"
+elif  [ $ARCH == "arm64" ]
+then
+	ARCH="aarch64"
+fi
+
+ARCH=`uname -m`
 KEY=https://packages.mced.tech/install/poudriere.cert
 REPO=https://packages.mced.tech/packages/freebsd_12-2_${ARCH}-ng_ports_devel
 KEY_LOC=/usr/local/etc/ssl/wireguard.crt
