@@ -1,20 +1,35 @@
---- /etc/inc/pkg-utils.orig.inc 2021-02-18 11:18:07.356449000 -0300
-+++ /etc/inc/pkg-utils.inc      2021-02-18 15:26:41.486078000 -0300
-@@ -402,7 +402,7 @@
-        if ($base_packages) {
-                $repo_param = "";
-        } else {
--               $repo_param = "-r {$g['product_name']}";
+--- /etc/inc/pkg-utils.inc.orig	2021-05-29 05:04:18.000000000 +0000
++++ /etc/inc/pkg-utils.inc	2021-06-05 14:24:00.726274000 +0000
+@@ -403,7 +403,7 @@
+ 	if ($base_packages) {
+ 		$repo_param = "";
+ 	} else {
+-		$repo_param = "-r {$g['product_name']}";
 +               $repo_param = "";
-        }
-
-        /*
-@@ -499,7 +499,7 @@
-                            $err);
-                        if (!$base_packages &&
-                            rtrim($out) != $g['product_name']) {
--                               continue;
+ 	}
+ 
+ 	/*
+@@ -495,12 +495,12 @@
+ 
+ 		$pkg_is_installed = false;
+ 
+-		if (is_pkg_installed($pkg_info['name'])) {
++		if (is_pkg_installed($pkg_info['name'].'-'.$pkg_info['version'])) {
+ 			$rc = pkg_exec("query %R {$pkg_info['name']}", $out,
+ 			    $err);
+ 			if (!$base_packages &&
+ 			    rtrim($out) != $g['product_name']) {
+-				continue;
 +                               //continue;
-                        }
-
-                        $pkg_info['installed'] = true;
+ 			}
+ 
+ 			$pkg_info['installed'] = true;
+@@ -540,7 +540,7 @@
+ 				}
+ 			}
+ 
+-		} else if (is_package_installed($pkg_info['shortname'])) {
++		} else if (is_package_installed($pkg_info['shortname'].'-'.$pkg_info['version'])) {
+ 			$pkg_info['broken'] = true;
+ 			$pkg_is_installed = true;
+ 		}
