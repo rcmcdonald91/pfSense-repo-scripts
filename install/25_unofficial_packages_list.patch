@@ -1,5 +1,5 @@
 --- /etc/inc/pkg-utils.inc.orig	2021-05-29 05:04:18.000000000 +0000
-+++ /etc/inc/pkg-utils.inc	2021-06-05 14:24:00.726274000 +0000
++++ /etc/inc/pkg-utils.inc	2021-06-08 11:05:29.153780000 +0000
 @@ -403,7 +403,7 @@
  	if ($base_packages) {
  		$repo_param = "";
@@ -9,13 +9,24 @@
  	}
  
  	/*
-@@ -495,12 +495,12 @@
+@@ -475,10 +475,15 @@
+ 	}
  
- 		$pkg_is_installed = false;
+ 	$result = array();
++	$ar_seen = array();
+ 	foreach ($search_items as $pkg_info) {
+ 		if (empty($pkg_info['name'])) {
+ 			continue;
+-		}
++		}	
++		// remove duplicates specifically for WG package
++		if ( $ar_seen[$pkg_info['name']] == 1) 
++			continue;
++		$ar_seen[$pkg_info['name']] = 1;
  
--		if (is_pkg_installed($pkg_info['name'])) {
-+		if (is_pkg_installed($pkg_info['name'].'-'.$pkg_info['version'])) {
- 			$rc = pkg_exec("query %R {$pkg_info['name']}", $out,
+ 		if (isset($pkg_filter) && !in_array($pkg_info['name'],
+ 		    $pkg_filter)) {
+@@ -500,7 +505,7 @@
  			    $err);
  			if (!$base_packages &&
  			    rtrim($out) != $g['product_name']) {
@@ -24,12 +35,3 @@
  			}
  
  			$pkg_info['installed'] = true;
-@@ -540,7 +540,7 @@
- 				}
- 			}
- 
--		} else if (is_package_installed($pkg_info['shortname'])) {
-+		} else if (is_package_installed($pkg_info['shortname'].'-'.$pkg_info['version'])) {
- 			$pkg_info['broken'] = true;
- 			$pkg_is_installed = true;
- 		}
