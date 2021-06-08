@@ -19,7 +19,7 @@ $CURL -s $KEY -o $KEY_LOC
 $CURL -s $PATCH_LOC -o /tmp/pkg.patch
 patch -p0 --ignore-whitespace < /tmp/pkg.patch
 REPO_OUTPUT="FreeBSD: { enabled: no } 
-Unofficial: { url: \"$REPO\", 
+mced: { url: \"$REPO\", 
 mirror_type: \"http\" ,
 signature_type: \"pubkey\",
 pubkey: \"$KEY_LOC\",
