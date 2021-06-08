@@ -23,6 +23,6 @@ mirror_type: \"http\" ,
 signature_type: \"pubkey\",
 pubkey: \"$KEY_LOC\",
 enabled: yes}"
-echo $REPO_OUTPUT > /usr/local/etc/pkg/repos/WireGuard.conf
+echo $REPO_OUTPUT > /usr/local/etc/pkg/repos/00_WireGuard.conf
 pkg update
 
