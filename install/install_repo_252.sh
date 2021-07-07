@@ -11,7 +11,7 @@ then
 fi
 
 KEY=https://packages.mced.tech/install/poudriere.cert
-REPO=https://packages.mced.tech/packages/freebsd_12-2_${ARCH}-ng_ports_252
+REPO=http://packages.mced.tech/packages/freebsd_12-2_${ARCH}-ng_ports_252
 KEY_LOC=/usr/local/etc/ssl/wireguard.crt
 PATCH_LOC=https://packages.mced.tech/install/25_unofficial_packages_list.patch
 $CURL -s $KEY -o $KEY_LOC
