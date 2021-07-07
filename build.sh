@@ -5,7 +5,7 @@ export PATH=$PATH:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/
 poudriere ports -u -p ng_ports_252
 poudriere ports -u -p ng_ports_251
 poudriere ports -u -p ng_ports_devel
-poudriere ports -u -p wg_pkg_devel
+poudriere ports -u -p wg_pkg_main
 # poudriere ports -u -p wg_kmod
 
 #Build all 12.2 archs
