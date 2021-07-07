@@ -11,7 +11,7 @@ poudriere ports -u -p wg_pkg_devel
 #Build all 12.2 archs
 for arch in amd64 armv7 aarch64
 do
-    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_251 -O wg_pkg_devel -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
-    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_252 -O wg_pkg_devel  -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
-    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_devel -O wg_pkg_devel  -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
+    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_251 -O wg_pkg_main -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
+    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_252 -O wg_pkg_main -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
+    poudriere bulk -j freebsd_12-2_$arch -p ng_ports_devel -O wg_pkg_main  -f /usr/local/etc/poudriere.d/pfSense-minion-packages-list
 done
