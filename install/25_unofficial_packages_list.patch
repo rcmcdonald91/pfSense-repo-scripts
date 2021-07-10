@@ -35,3 +35,33 @@
  			}
  
  			$pkg_info['installed'] = true;
+@@ -524,6 +529,18 @@
+ 			$pkg_info['installed_version'] = str_replace("\n", "",
+ 			    $out);
+ 
++			 //check if pkg is WG and if so which repo
++			 $wg_repo="";
++			if ($pkg_info['name'] == "pfSense-pkg-WireGuard") {
++				$rc = pkg_exec("query %R {$pkg_info['name']}", $out,
++				$err);
++				$wg_repo = rtrim($out);
++				if ($wg_repo == "mced") {
++					$pkg_info['shortname'] = $pkg_info['shortname'] . " Dev";
++				}
++				//force the query to use the installed version repo
++				$wg_repo="-r " . $wg_repo;
++			}
+ 			/*
+ 			 * We used pkg info to collect pkg data so remote
+ 			 * version is not available. Lets try to collect it
+@@ -531,8 +548,8 @@
+ 			 */
+ 			if ($search_rc != 0 || !$did_search) {
+ 				$rc = pkg_exec(
+-				    "rquery -U %v {$pkg_info['name']}", $out,
+-				    $err);
++					"rquery {$wg_repo} -U %v {$pkg_info['name']}", $out,
++					$err);
+ 
+ 				if ($rc == 0) {
+ 					$pkg_info['version'] =
